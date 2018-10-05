@@ -1,0 +1,7 @@
+# 
+
+deb http://deb.debian.org/debian/ sid  main contrib non-free
+# deb-src http://deb.debian.org/debian/ sid main non-free contrib
+
+deb http://deb.debian.org/debian/ experimental main contrib non-free
+# deb-src http://deb.debian.org/debian/ experimental main contrib non-free

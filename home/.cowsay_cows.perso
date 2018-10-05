@@ -1,0 +1,72 @@
+# cows
+001	apt
+002	beavis.zen
+003	bong
+004	bud-frogs
+005	bunny
+006	calvin
+007	cheese
+008	cock
+009	cower
+010	daemon
+011	default
+012	dragon
+013	dragon-and-cow
+014	duck
+015	elephant
+016	elephant-in-snake
+017	eyes
+018	flaming-sheep
+019	ghostbusters
+020	gnu
+021	head-in
+022	hellokitty
+023	kiss
+024	kitty
+025	koala
+026	kosh
+027	luke-koala
+028	mech-and-cow
+029	meow
+030	milk
+031	moofasa
+032	moose
+033	mutilated
+034	ren
+035	sheep
+036	skeleton
+037	snowman
+038	sodomized-sheep
+039	stegosaurus
+040	stimpy
+041	suse
+042	three-eyes
+043	turkey
+044	turtle
+045	tux
+046	vader
+047	vader-koala
+048	www
+049	default
+050	default
+
+
+# cows style
+500	-b
+501	-d
+502	-g
+503	-p
+504	-s
+505	-t
+506	-w
+507	-y
+508	 
+509	 
+510	 
+
+
+# cowthink/say
+600	cowsay
+601	cowsay
+602	cowsay
+603	cowthink
