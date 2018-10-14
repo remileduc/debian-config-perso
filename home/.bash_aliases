@@ -1,7 +1,9 @@
 # some personnal aliases
 
 # cowsay lit la température :
-alias cowtemp='/home/xinouch/.cowsay_helper.sh'
+alias cowtemp='/home/sid/.cowsay_helper.sh'
+
+alias updrade='sudo apt update && sudo apt upgrade && sudo apt-get autoremove --purge'
 
 # éteint l'écran :
 alias etoff='xset dpms force off'

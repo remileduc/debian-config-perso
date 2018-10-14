@@ -15,7 +15,7 @@
 
   printf \
       "$(date "+%A %d %B %Y, %T.%N")
-      $(($(cat /sys/devices/virtual/hwmon/hwmon0/temp1_input) / 1000))°C" | \
+      $(($(cat /sys/class/thermal/thermal_zone2/temp) / 1000))°C    |    $(($(cat /sys/class/thermal/thermal_zone3/temp) / 1000))°C" | \
       $(grep $(printf %03d $say) ~/.cowsay_cows.perso | cut -f 2) \
       $(grep $(printf %03d $app) ~/.cowsay_cows.perso | cut -f 2) -f \
       $(grep $(printf %03d $cow) ~/.cowsay_cows.perso | cut -f 2) \
