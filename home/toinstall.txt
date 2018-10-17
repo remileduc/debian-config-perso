@@ -1,0 +1,19 @@
+remove:
+- firefox-esr
+- firefox-esr-l10n-fr
+
+
+install
+- cowsay
+- cowsay-off
+- firefox
+- firefox-l10n-fr
+- kdeconnect
+- kid3
+- kodi
+- vlc
+
+commandes for kdeconnect:
+- suspend = qdbus org.kde.Solid.PowerManagement /org/freedesktop/PowerManagement Suspend
+- voldown = qdbus org.kde.kglobalaccel /component/kmix invokeShortcut "decrease_volume"
+- volup = qdbus org.kde.kglobalaccel /component/kmix invokeShortcut "increase_volume"
