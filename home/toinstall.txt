@@ -17,3 +17,6 @@ commandes for kdeconnect:
 - suspend = qdbus org.kde.Solid.PowerManagement /org/freedesktop/PowerManagement Suspend
 - voldown = qdbus org.kde.kglobalaccel /component/kmix invokeShortcut "decrease_volume"
 - volup = qdbus org.kde.kglobalaccel /component/kmix invokeShortcut "increase_volume"
+- show konsole = qdbus org.kde.KWin /KWin setCurrentDesktop 1
+- show internet = qdbus org.kde.KWin /KWin setCurrentDesktop 2
+- show kodi = qdbus org.kde.KWin /KWin setCurrentDesktop 4
