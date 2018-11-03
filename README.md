@@ -53,6 +53,9 @@ Files for my personal debian config, so I don't have to recreate them each time.
 
 [Samba](#samba)
 
+[Useful information](#useful-information)
+- [Sudo](#sudo)
+
 [Rescue](#rescue)
 - [Mount LUKS partition](#mount-luks-partition)
 - [Chroot to zotac](#chroot-to-zotac)
@@ -154,7 +157,7 @@ Software
 Install the following:
 
 ```
-cowsay cowsay-off firefox firefox-l10n-fr kdeconnect kodi openssh-server qbittorrent vlc
+cowsay cowsay-off firefox firefox-l10n-fr firmware-iwlwifi firmware-realtek kdeconnect kodi openssh-server qbittorrent vlc
 ```
 
 **Uninstall** the following:
@@ -226,6 +229,20 @@ writable = yes
 ```
 
 Restart the service `smbd` and connect to `\\IP\Share`.
+
+Useful information
+------------------
+
+### Sudo ###
+
+managesudo permission:
+
+```bash
+# give sudo permission:
+usermod -aG sudo sid
+# remove sudo permission:
+deluser sid sudo
+```
 
 Rescue
 ------
