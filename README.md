@@ -32,6 +32,9 @@ Files for my personal debian config, so I don't have to recreate them each time.
 ### Table of contents
 
 [Installation](#installation)
+- [Sid](#sid)
+- [Partitionning](#partitionning)
+- [KDE](#kde)
 
 [Copy config files](#copy-config-files)
 
@@ -41,20 +44,43 @@ Files for my personal debian config, so I don't have to recreate them each time.
 - [Change crypttab](#change-crypttab)
 - [Key slots management](#key-slots-management)
 
+[Software](#software)
+- [System packages](#system-packages)
+- [Firefox extensions](#firefox-extensions)
+- [Kodi extensions](#kodi-extensions)
+
 [OpenDNS](#opendns)
 
 [Samba](#samba)
 
+[Rescue](#rescue)
+- [Mount LUKS partition](#mount-luks-partition)
+- [Chroot to zotac](#chroot-to-zotac)
+
 Installation
 ------------
 
-Partitions:
+### Sid ###
+
+1. download a Testing daily-build netinst for Debian: https://cdimage.debian.org/cdimage/daily-builds/daily/arch-latest/amd64/iso-cd/
+1. download the daily built mini iso for Debian: https://d-i.debian.org/daily-images/amd64/daily/netboot/
+1. extract the mini iso to your freshly formatted USB key
+1. copy the `efi` folder from the testing netinst iso to your USB key
+
+At the beginning, choose `Advanced options -> Expert install`. Then, when chosing repositories, select `Sid`.
+
+### Partitionning ###
+
 - efi = 100 Mio (unused) with boot flag, FAT32
 - /boot = 400 Mio
 - / = 50 Gio, ENCRYPTED
 - /mount/persistent = size of RAM, ENCRYPTED, `defaults,nodev,noexec,nosuid,noatime,nodiratime`
 - /home = everything else, ENCRYPTED
 - no swap
+
+### KDE ###
+
+During installation process, chose to install KDE.
 
 Copy config files
 -----------------
@@ -120,6 +146,34 @@ Show infos
 cryptsetup luksDump /dev/sdb1
 ```
 
+Software
+--------
+
+### System packages ###
+
+Install the following:
+
+```
+cowsay cowsay-off firefox firefox-l10n-fr kdeconnect kodi openssh-server qbittorrent vlc
+```
+
+**Uninstall** the following:
+
+```
+firefox-esr firefox-esr-l10n-fr xserver-xorg-video-intel
+```
+
+### Firefox extensions ###
+
+- Behind the overlay - revival
+- HTTPS Everywhere
+- uBlock Origin
+
+### Kodi extensions ###
+
+- enable [remote control](https://kodi.wiki/view/Smartphone/tablet_remotes)
+- [YouTube](https://kodi.wiki/view/Add-on:YouTube)
+
 OpenDNS
 -------
 
@@ -172,3 +226,54 @@ writable = yes
 ```
 
 Restart the service `smbd` and connect to `\\IP\Share`.
+
+Rescue
+------
+
+All commands should be run as root unless specified.
+
+### Mount LUKS partition ###
+
+To mount a LUKS encrypted partition:
+
+```bash
+# first we decrypt
+cryptsetup luksOpen /dev/sda3 zotac
+# then we mount
+mkdir /media/zotac
+mount /dev/mapper/zotac /media/zotac
+```
+
+If needed, we can unmount it to relock it:
+```bash
+umount /media/zotac
+cryptsetup luksClose zotac
+```
+
+### Chroot to zotac ###
+
+We assume that the system partition is mounted in `/media/zotac`.
+
+First we need to prepare all the system folders:
+
+```bash
+mount --bind /dev /media/zotac/dev
+mount -t proc /proc /media/zotac/proc
+mount --bind /run  /media/zotac/run
+mount -t sysfs /sys /media/zotac/sys
+```
+
+**Note**: to only install new kernel, do this:
+```bash
+mount /dev/sda2 /media/zotac/boot
+mount -o bind /proc /media/zotac/proc
+mount -o bind /proc /media/zotac/dev
+```
+
+Finally, the chroot:
+
+```bash
+chroot /media/zotac
+```
+To quit, just run `exit`.
+
