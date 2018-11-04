@@ -55,6 +55,7 @@ Files for my personal debian config, so I don't have to recreate them each time.
 
 [Useful information](#useful-information)
 - [Sudo](#sudo)
+- [KDE Connect](#kde-connect)
 
 [Rescue](#rescue)
 - [Mount LUKS partition](#mount-luks-partition)
@@ -213,22 +214,26 @@ Edit samba config file `/etc/samba/smb.conf`:
 
 ```
 # In [global] section:
-allow insecure wide links = yes
+   allow insecure wide links = yes
+
+# In [homes] section:
+   available = no
 
 # At the end of the file, create a new section:
 [shared]
-follow symlinks = yes
-wide links = yes
-path = /home/sid/shared
-available = yes
-valid users = sid
-read only = no
-browsable = yes
-public = yes
-writable = yes
+   comment = Shared folders for Zotac
+   follow symlinks = yes
+   wide links = yes
+   path = /home/sid/shared
+   available = yes
+   valid users = sid
+   read only = no
+   browsable = yes
+   public = yes
+   writable = yes
 ```
 
-Restart the service `smbd` and connect to `\\IP\Share`.
+Restart the service `smbd` and connect to `\\IP\shared`.
 
 Useful information
 ------------------
@@ -247,7 +252,7 @@ deluser sid sudo
 ### KDE Connect ###
 
 Commands for KDE Connect:
-- suspend = qdbus org.kde.Solid.PowerManagement /org/freedesktop/PowerManagement Suspend
+- `suspend` = qdbus org.kde.Solid.PowerManagement /org/freedesktop/PowerManagement Suspend
 - `voldown` = qdbus org.kde.kglobalaccel /component/kmix invokeShortcut "decrease_volume"
 - `volup` = qdbus org.kde.kglobalaccel /component/kmix invokeShortcut "increase_volume"
 - `show konsole` = qdbus org.kde.KWin /KWin setCurrentDesktop 1
