@@ -154,16 +154,16 @@ Software
 
 ### System packages ###
 
-Install the following:
-
-```
-cowsay cowsay-off firefox firefox-l10n-fr firmware-iwlwifi firmware-realtek kdeconnect kodi openssh-server qbittorrent vlc
-```
-
 **Uninstall** the following:
 
 ```
 firefox-esr firefox-esr-l10n-fr xserver-xorg-video-intel
+```
+
+Install the following:
+
+```
+cowsay cowsay-off firefox firefox-l10n-fr firmware-iwlwifi firmware-misc-nonfree firmware-realtek git kdeconnect kodi mlocate qbittorrent samba vlc
 ```
 
 ### Firefox extensions ###
@@ -243,6 +243,16 @@ usermod -aG sudo sid
 # remove sudo permission:
 deluser sid sudo
 ```
+
+### KDE Connect ###
+
+Commands for KDE Connect:
+- suspend = qdbus org.kde.Solid.PowerManagement /org/freedesktop/PowerManagement Suspend
+- `voldown` = qdbus org.kde.kglobalaccel /component/kmix invokeShortcut "decrease_volume"
+- `volup` = qdbus org.kde.kglobalaccel /component/kmix invokeShortcut "increase_volume"
+- `show konsole` = qdbus org.kde.KWin /KWin setCurrentDesktop 1
+- `show internet` = qdbus org.kde.KWin /KWin setCurrentDesktop 2
+- `show kodi` = qdbus org.kde.KWin /KWin setCurrentDesktop 4
 
 Rescue
 ------
