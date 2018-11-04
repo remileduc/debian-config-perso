@@ -49,12 +49,15 @@ Files for my personal debian config, so I don't have to recreate them each time.
 - [Firefox extensions](#firefox-extensions)
 - [Kodi extensions](#kodi-extensions)
 
+[Firewall](#firewall)
+
 [OpenDNS](#opendns)
 
 [Samba](#samba)
 
 [Useful information](#useful-information)
 - [Sudo](#sudo)
+- [SSH](#ssh)
 - [KDE Connect](#kde-connect)
 
 [Rescue](#rescue)
@@ -164,7 +167,7 @@ firefox-esr firefox-esr-l10n-fr xserver-xorg-video-intel
 Install the following:
 
 ```
-cowsay cowsay-off firefox firefox-l10n-fr firmware-iwlwifi firmware-misc-nonfree firmware-realtek git kdeconnect kodi mlocate qbittorrent samba vlc
+cowsay cowsay-off firefox firefox-l10n-fr firmware-iwlwifi firmware-misc-nonfree firmware-realtek git kdeconnect kodi mlocate qbittorrent samba ufw gufw vlc
 ```
 
 ### Firefox extensions ###
@@ -177,6 +180,49 @@ cowsay cowsay-off firefox firefox-l10n-fr firmware-iwlwifi firmware-misc-nonfree
 
 - enable [remote control](https://kodi.wiki/view/Smartphone/tablet_remotes)
 - [YouTube](https://kodi.wiki/view/Add-on:YouTube)
+
+Firewall
+--------
+
+We use Uncomplicated Firewall (`ufw`). The goal is to accept nothing except the
+needed, and only on the local network.
+
+To star, we need to enable `ufw`:
+
+```bash
+systemctl enable ufw
+service ufw start
+ufw enable
+```
+
+Then, we need the following rules:
+
+```bash
+ufw default deny incoming
+ufw default allow outgoing
+# SSH
+ufw limit from 192.168.1.0/24 to any app ssh comment "SSH IPv4 rule"
+ufw limit from 2a02:8434:3953:2901::/64 to any app ssh comment "SSH IPv6 rule"
+# Samba
+ufw allow from 192.168.1.0/24 to any app samba comment "Samba IPv4 rule"
+ufw allow from 2a02:8434:3953:2901::/64 to any app samba comment "Samba IPv6 rule"
+# KDE Connect
+ufw allow from 192.168.1.0/24 to any port 1714:1764 proto tcp comment "KDE Connect IPv4 TCP rule"
+ufw allow from 192.168.1.0/24 to any port 1714:1764 proto udp comment "KDE Connect IPv4 UDP rule"
+ufw allow from 2a02:8434:3953:2901::/64 to any port 1714:1764 proto tcp comment "KDE Connect IPv6 TCP rule"
+ufw allow from 2a02:8434:3953:2901::/64 to any port 1714:1764 proto udp comment "KDE Connect IPv6 UDP rule"
+# Kodi
+ufw allow from 192.168.1.0/24 to any port 8080 proto tcp comment "Kodi IPv4 rule"
+ufw allow from 2a02:8434:3953:2901::/64 to any port 8080 proto tcp comment "Kodi IPv6 rule"
+# To finish
+sudo ufw reload
+```
+
+To check `ufw` rules, you can start `gufw` or use
+
+```bash
+ufw status verbose
+```
 
 OpenDNS
 -------
@@ -247,6 +293,15 @@ managesudo permission:
 usermod -aG sudo sid
 # remove sudo permission:
 deluser sid sudo
+```
+
+### SSH ###
+
+In order to be able to login as `root` via SSH, you need to edit the file
+`/etc/ssh/sshd_config` and add the following line:
+
+```
+PermitRootLogin yes
 ```
 
 ### KDE Connect ###
