@@ -161,7 +161,7 @@ Software
 **Uninstall** the following:
 
 ```
-firefox-esr firefox-esr-l10n-fr xserver-xorg-video-intel
+appstream firefox-esr firefox-esr-l10n-fr xserver-xorg-video-intel
 ```
 
 Install the following:
