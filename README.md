@@ -167,7 +167,7 @@ appstream firefox-esr firefox-esr-l10n-fr xserver-xorg-video-intel
 Install the following:
 
 ```
-cowsay cowsay-off firefox firefox-l10n-fr firmware-iwlwifi firmware-misc-nonfree firmware-realtek git kdeconnect kodi mlocate qbittorrent samba ufw gufw vlc
+android-tools-adb android-tools-fastboot cowsay cowsay-off firefox firefox-l10n-fr firmware-iwlwifi firmware-misc-nonfree firmware-realtek git kdeconnect kodi mlocate qbittorrent samba ufw gufw vlc
 ```
 
 ### Firefox extensions ###
