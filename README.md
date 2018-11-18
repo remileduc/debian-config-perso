@@ -167,7 +167,7 @@ appstream firefox-esr firefox-esr-l10n-fr xserver-xorg-video-intel
 Install the following:
 
 ```
-android-tools-adb android-tools-fastboot cowsay cowsay-off firefox firefox-l10n-fr firmware-iwlwifi firmware-misc-nonfree firmware-realtek git kdeconnect kodi mlocate qbittorrent samba ufw gufw vlc
+android-tools-adb android-tools-fastboot cowsay cowsay-off firefox firefox-l10n-fr firmware-iwlwifi firmware-misc-nonfree firmware-realtek git kdeconnect kodi mlocate qbittorrent rsync samba ufw gufw vlc
 ```
 
 ### Firefox extensions ###
@@ -215,7 +215,7 @@ ufw allow from 2a02:8434:3953:2901::/64 to any port 1714:1764 proto udp comment 
 ufw allow from 192.168.1.0/24 to any port 8080 proto tcp comment "Kodi IPv4 rule"
 ufw allow from 2a02:8434:3953:2901::/64 to any port 8080 proto tcp comment "Kodi IPv6 rule"
 # To finish
-sudo ufw reload
+ufw reload
 ```
 
 To check `ufw` rules, you can start `gufw` or use
