@@ -173,6 +173,7 @@ android-tools-adb android-tools-fastboot cowsay cowsay-off firefox firefox-l10n-
 ### Firefox extensions ###
 
 - Behind the overlay - revival
+- Cast Kodi
 - HTTPS Everywhere
 - uBlock Origin
 
@@ -206,6 +207,11 @@ ufw limit from 2a02:8434:3953:2901::/64 to any app ssh comment "SSH IPv6 rule"
 # Samba
 ufw allow from 192.168.1.0/24 to any app samba comment "Samba IPv4 rule"
 ufw allow from 2a02:8434:3953:2901::/64 to any app samba comment "Samba IPv6 rule"
+# qBittorrent
+ufw allow from 192.168.1.0/24 to any app qbittorrent comment "qBittorrent IPv4 rule"
+ufw allow from 2a02:8434:3953:2901::/64 to any app qbittorrent comment "qBittorrent IPv6 rule"
+ufw allow from 192.168.1.0/24 to any port 8081 comment "qBittorrent WebUI IPv4 rule"
+ufw allow from 2a02:8434:3953:2901::/64 to any port 8081 comment "qBittorrent WebUI IPv6 rule"
 # KDE Connect
 ufw allow from 192.168.1.0/24 to any port 1714:1764 proto tcp comment "KDE Connect IPv4 TCP rule"
 ufw allow from 192.168.1.0/24 to any port 1714:1764 proto udp comment "KDE Connect IPv4 UDP rule"
@@ -249,11 +255,13 @@ Create a shared folder and create some links (not root!)
 
 ```bash
 cd ~
+mkdir Téléchargements/p2p
 mkdir shared && cd shared
 ln -s ../Documents Documents
 ln -s ../Images Pictures
 ln -s ../Musique Music
 ln -s ../Vidéos/ Videos
+ln -s ../Téléchargements/ Downloads
 ```
 
 Edit samba config file `/etc/samba/smb.conf`:
