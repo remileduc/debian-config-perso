@@ -181,6 +181,7 @@ android-tools-adb android-tools-fastboot cowsay cowsay-off firefox firefox-l10n-
 
 - enable [remote control](https://kodi.wiki/view/Smartphone/tablet_remotes)
 - [YouTube](https://kodi.wiki/view/Add-on:YouTube)
+- [CU Lyrics](https://kodi.wiki/view/Add-on:CU_LRC_Lyrics)
 
 Firewall
 --------
@@ -219,7 +220,9 @@ ufw allow from 2a02:8434:3953:2901::/64 to any port 1714:1764 proto tcp comment 
 ufw allow from 2a02:8434:3953:2901::/64 to any port 1714:1764 proto udp comment "KDE Connect IPv6 UDP rule"
 # Kodi
 ufw allow from 192.168.1.0/24 to any port 8080 proto tcp comment "Kodi IPv4 rule"
+ufw allow from 192.168.1.0/24 to any port 9090 proto tcp comment "Kodi API IPv4 rule"
 ufw allow from 2a02:8434:3953:2901::/64 to any port 8080 proto tcp comment "Kodi IPv6 rule"
+ufw allow from 2a02:8434:3953:2901::/64 to any port 9090 proto tcp comment "Kodi API IPv6 rule"
 # To finish
 ufw reload
 ```
