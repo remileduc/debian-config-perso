@@ -209,9 +209,9 @@ ufw limit from 2a02:8434:3953:2901::/64 to any app ssh comment "SSH IPv6 rule"
 ufw allow from 192.168.1.0/24 to any app samba comment "Samba IPv4 rule"
 ufw allow from 2a02:8434:3953:2901::/64 to any app samba comment "Samba IPv6 rule"
 # qBittorrent
-ufw allow from 192.168.1.0/24 to any app qbittorrent comment "qBittorrent IPv4 rule"
-ufw allow from 2a02:8434:3953:2901::/64 to any app qbittorrent comment "qBittorrent IPv6 rule"
+ufw allow app qbittorrent comment "qBittorrent IPv4 rule"
 ufw allow from 192.168.1.0/24 to any port 8081 comment "qBittorrent WebUI IPv4 rule"
+ufw allow app qbittorrent comment "qBittorrent IPv6 rule"
 ufw allow from 2a02:8434:3953:2901::/64 to any port 8081 comment "qBittorrent WebUI IPv6 rule"
 # KDE Connect
 ufw allow from 192.168.1.0/24 to any port 1714:1764 proto tcp comment "KDE Connect IPv4 TCP rule"
@@ -231,6 +231,12 @@ To check `ufw` rules, you can start `gufw` or use
 
 ```bash
 ufw status verbose
+```
+
+To clear rules:
+```bash
+ufw reset
+ufw enable
 ```
 
 OpenDNS
