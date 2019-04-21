@@ -45,6 +45,7 @@ Files for my personal debian config, so I don't have to recreate them each time.
 - [Key slots management](#key-slots-management)
 
 [Software](#software)
+- [Multi-Arch](#multi-arch)
 - [System packages](#system-packages)
 - [Firefox extensions](#firefox-extensions)
 - [Kodi extensions](#kodi-extensions)
@@ -155,6 +156,14 @@ cryptsetup luksDump /dev/sdb1
 
 Software
 --------
+
+### Multi-Arch ###
+
+To install 32 bits packages, you need to enable the 32 bits architecture:
+
+```bash
+dpkg --add-architecture i386
+```
 
 ### System packages ###
 
