@@ -45,7 +45,7 @@ Files for my personal debian config, so I don't have to recreate them each time.
 - [Key slots management](#key-slots-management)
 
 [Software](#software)
-- [Multi-Arch](#multi-arch)
+- [Setup](#setup)
 - [System packages](#system-packages)
 - [Firefox extensions](#firefox-extensions)
 - [Kodi extensions](#kodi-extensions)
@@ -157,12 +157,19 @@ cryptsetup luksDump /dev/sdb1
 Software
 --------
 
-### Multi-Arch ###
+### Setup ###
 
 To install 32 bits packages, you need to enable the 32 bits architecture:
 
 ```bash
 dpkg --add-architecture i386
+```
+
+To install the last version of Kodi, you need to enable the *deb-multimedia* repository. To do so, you need to install the key:
+
+```bash
+sudo apt-get update -oAcquire::AllowInsecureRepositories=true
+sudo apt-get install deb-multimedia-keyring
 ```
 
 ### System packages ###
@@ -189,6 +196,10 @@ android-tools-adb android-tools-fastboot cowsay cowsay-off firefox firefox-l10n-
 ### Kodi extensions ###
 
 - enable [remote control](https://kodi.wiki/view/Smartphone/tablet_remotes)
+- [InputStream Adaptative](https://kodi.wiki/view/Add-on:InputStream_Adaptive)
+    - `apt install kodi-inputstream-adaptive`
+- [InputStream RTMP](https://kodi.wiki/view/Add-on:RTMP_Input)
+    - `apt install kodi-inputstream-rtmp`
 - [YouTube](https://kodi.wiki/view/Add-on:YouTube)
 - [CU Lyrics](https://kodi.wiki/view/Add-on:CU_LRC_Lyrics)
 

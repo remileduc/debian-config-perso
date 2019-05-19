@@ -1,2 +1,1 @@
-APT::Default-Release "unstable";
 APT::Architecture "amd64";

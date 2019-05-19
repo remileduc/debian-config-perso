@@ -1,0 +1,79 @@
+Package: kodi*
+Pin: origin "www.deb-multimedia.org"
+Pin-priority: 550
+
+Package: libass9
+Pin: origin "www.deb-multimedia.org"
+Pin-priority: 550
+
+Package: libaom0
+Pin: origin "www.deb-multimedia.org"
+Pin-priority: 550
+
+Package: libavcodec58
+Pin: origin "www.deb-multimedia.org"
+Pin-priority: 550
+
+Package: libavfilter7
+Pin: origin "www.deb-multimedia.org"
+Pin-priority: 550
+
+Package: libavformat58
+Pin: origin "www.deb-multimedia.org"
+Pin-priority: 550
+
+Package: libavresample4
+Pin: origin "www.deb-multimedia.org"
+Pin-priority: 550
+
+Package: libavutil56
+Pin: origin "www.deb-multimedia.org"
+Pin-priority: 550
+
+Package: libbluray2
+Pin: origin "www.deb-multimedia.org"
+Pin-priority: 550
+
+Package: libcdio18
+Pin: origin "www.deb-multimedia.org"
+Pin-priority: 550
+
+Package: libcec4
+Pin: origin "www.deb-multimedia.org"
+Pin-priority: 550
+
+Package: libchromaprint1
+Pin: origin "www.deb-multimedia.org"
+Pin-priority: 550
+
+Package: libcrossguid0
+Pin: origin "www.deb-multimedia.org"
+Pin-priority: 550
+
+Package: libiso9660-11
+Pin: origin "www.deb-multimedia.org"
+Pin-priority: 550
+
+Package: libmp3lame0
+Pin: origin "www.deb-multimedia.org"
+Pin-priority: 550
+
+Package: libpostproc55
+Pin: origin "www.deb-multimedia.org"
+Pin-priority: 550
+
+Package: libp8-platform2
+Pin: origin "www.deb-multimedia.org"
+Pin-priority: 550
+
+Package: librubberband2
+Pin: origin "www.deb-multimedia.org"
+Pin-priority: 550
+
+Package: libswresample3
+Pin: origin "www.deb-multimedia.org"
+Pin-priority: 550
+
+Package: libswscale5
+Pin: origin "www.deb-multimedia.org"
+Pin-priority: 550
