@@ -29,7 +29,7 @@ Debian config
 
 Files for my personal debian config, so I don't have to recreate them each time...
 
-### Table of contents
+### Table of contents ###
 
 [Installation](#installation)
 - [Sid](#sid)
@@ -44,6 +44,8 @@ Files for my personal debian config, so I don't have to recreate them each time.
 - [Change crypttab](#change-crypttab)
 - [Key slots management](#key-slots-management)
 
+[Ramdisk](#ramdisk)
+
 [Software](#software)
 - [Setup](#setup)
 - [System packages](#system-packages)
@@ -51,8 +53,6 @@ Files for my personal debian config, so I don't have to recreate them each time.
 - [Kodi extensions](#kodi-extensions)
 
 [Firewall](#firewall)
-
-[OpenDNS](#opendns)
 
 [Samba](#samba)
 
@@ -104,7 +104,7 @@ Follow instructions here (listed below): https://debian-facile.org/viewtopic.php
 
 Everything should be run in root.
 
-### Create keyfile
+### Create keyfile ###
 
 This keyfile holds the keypass to open the home partition
 
@@ -113,7 +113,7 @@ dd if=/dev/random of=/root/sda4_keyfile bs=4096 count=1
 chmod a-rwx,u=r /root/sda4_keyfile
 ```
 
-### Add the keyfile as a key
+### Add the keyfile as a key ###
 
 We add the generated keyfile as a key to open Home. Here, the UUID used is the UUID of the Home partition (/dev/sda4), not the encrypted partition (/dev/mapper/sda4_crypt). Use `blkid` to fetch the UUID.
 
@@ -121,7 +121,7 @@ We add the generated keyfile as a key to open Home. Here, the UUID used is the U
 cryptsetup luksAddKey /dev/disk/by-uuid/c4295a74-5c31-475b-aa57-b9fa4c2de36e /root/sda4_keyfile
 ```
 
-### Change crypttab
+### Change crypttab ###
 
 We tell to the file `/etc/crypttab` to automatically fetch the keyfile (same rules as earlier for the UUID):
 
@@ -131,7 +131,7 @@ sda4_crypt UUID=c4295a74-5c31-475b-aa57-b9fa4c2de36e /root/sda4_keyfile luks,dis
 
 Then, reboot and pray...
 
-### Key slots management
+### Key slots management ###
 
 Add key
 ```bash
@@ -153,6 +153,11 @@ Show infos
 ```bash
 cryptsetup luksDump /dev/sdb1
 ```
+
+Ramdisk
+-------
+
+Follow the steps in this repository: [debian-systemd-ramdisk](https://github.com/remileduc/debian-systemd-ramdisk).
 
 Software
 --------
@@ -183,15 +188,15 @@ appstream firefox-esr firefox-esr-l10n-fr xserver-xorg-video-intel
 Install the following:
 
 ```
-android-tools-adb android-tools-fastboot cowsay cowsay-off firefox firefox-l10n-fr firmware-iwlwifi firmware-misc-nonfree firmware-realtek git kdeconnect kodi mlocate qbittorrent rsync samba ufw gufw vlc
+android-tools-adb android-tools-fastboot cowsay cowsay-off firefox firefox-l10n-fr firmware-iwlwifi firmware-misc-nonfree firmware-realtek git kdeconnect kodi mlocate qbittorrent rsync samba ufw vlc
 ```
 
 ### Firefox extensions ###
 
-- Behind the overlay - revival
-- Cast Kodi
-- HTTPS Everywhere
-- uBlock Origin
+- [Behind the overlay - revival](https://addons.mozilla.org/fr/firefox/addon/behind-the-overlay-revival/)
+- [Cast Kodi](https://addons.mozilla.org/fr/firefox/addon/castkodi/)
+- [HTTPS Everywhere](https://addons.mozilla.org/fr/firefox/addon/https-everywhere/)
+- [uBlock Origin](https://addons.mozilla.org/fr/firefox/addon/ublock-origin/)
 
 ### Kodi extensions ###
 
@@ -222,32 +227,14 @@ Then, we need the following rules:
 ```bash
 ufw default deny incoming
 ufw default allow outgoing
-# SSH
-ufw limit from 192.168.1.0/24 to any app ssh comment "SSH IPv4 rule"
-ufw limit from 2a02:8434:3953:2901::/64 to any app ssh comment "SSH IPv6 rule"
-# Samba
-ufw allow from 192.168.1.0/24 to any app samba comment "Samba IPv4 rule"
-ufw allow from 2a02:8434:3953:2901::/64 to any app samba comment "Samba IPv6 rule"
-# qBittorrent
-ufw allow app qbittorrent comment "qBittorrent IPv4 rule"
-ufw allow from 192.168.1.0/24 to any port 8081 comment "qBittorrent WebUI IPv4 rule"
-ufw allow app qbittorrent comment "qBittorrent IPv6 rule"
-ufw allow from 2a02:8434:3953:2901::/64 to any port 8081 comment "qBittorrent WebUI IPv6 rule"
-# KDE Connect
-ufw allow from 192.168.1.0/24 to any port 1714:1764 proto tcp comment "KDE Connect IPv4 TCP rule"
-ufw allow from 192.168.1.0/24 to any port 1714:1764 proto udp comment "KDE Connect IPv4 UDP rule"
-ufw allow from 2a02:8434:3953:2901::/64 to any port 1714:1764 proto tcp comment "KDE Connect IPv6 TCP rule"
-ufw allow from 2a02:8434:3953:2901::/64 to any port 1714:1764 proto udp comment "KDE Connect IPv6 UDP rule"
-# Kodi
-ufw allow from 192.168.1.0/24 to any port 8080 proto tcp comment "Kodi IPv4 rule"
-ufw allow from 192.168.1.0/24 to any port 9090 proto tcp comment "Kodi API IPv4 rule"
-ufw allow from 2a02:8434:3953:2901::/64 to any port 8080 proto tcp comment "Kodi IPv6 rule"
-ufw allow from 2a02:8434:3953:2901::/64 to any port 9090 proto tcp comment "Kodi API IPv6 rule"
+ufw default allow routed
 # To finish
 ufw reload
 ```
 
-To check `ufw` rules, you can start `gufw` or use
+**Note:** Full configuration of the Firewall is done in the router step. See [debian-vpn-router](https://github.com/remileduc/debian-vpn-router).
+
+To check `ufw` rules:
 
 ```bash
 ufw status verbose
@@ -257,16 +244,6 @@ To clear rules:
 ```bash
 ufw reset
 ufw enable
-```
-
-OpenDNS
--------
-
-Edit the file `/etc/dhcp/dhclient.conf` and put the following lines:
-
-```
-prepend domain-name-servers 208.67.220.220,208.67.222.222;
-prepend dhcp6.name-servers 2620:0:ccd::2,2620:0:ccc::2;
 ```
 
 Samba
